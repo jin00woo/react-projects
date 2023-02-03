@@ -1,0 +1,1 @@
+{"ast":null,"code":"export default function HomePage() {\n  return;\n}","map":{"version":3,"sources":["/Users/jinwoohan/Documents/GitHub/react-tutorial/Chapter23-Nextjs/pages/index.js"],"names":["HomePage"],"mappings":"AAAA,eAAe,SAASA,QAAT,GAAmB;AAC9B;AACH","sourcesContent":["export default function HomePage(){\n    return;\n}"]},"metadata":{},"sourceType":"module"}
