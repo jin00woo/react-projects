@@ -11,12 +11,11 @@ import Button from "./Button";
 // Hook
 import { useHomeFetch } from "../hooks/useHomeFetch";
 // Image
-import NoImage from "../images/no_image.jpg";
+import NoImage from "../images/no_image.jpeg";
 
 const Home = () => {
   const { state, loading, error, searchTerm, setSearchTerm, setIsLoadingMore } =
     useHomeFetch();
-  console.log(state);
 
   if (error) return <div>Something went wrong!</div>;
 

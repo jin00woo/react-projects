@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 // API
 import API from "../API";
+// Heplers
+import { isPersistedState } from "../helpers";
 
 const initialState = {
   page: 0,
@@ -21,7 +23,6 @@ export const useHomeFetch = () => {
       setError(false);
       setLoading(true);
       const movies = await API.fetchMovies(searchTerm, page);
-      console.log(movies);
       setState((prev) => ({
         ...movies,
         results:
@@ -35,6 +36,13 @@ export const useHomeFetch = () => {
 
   // Initial and search
   useEffect(() => {
+    if (!searchTerm) {
+      const sessionState = isPersistedState("homeState");
+      if (sessionState) {
+        setState(sessionState);
+        return;
+      }
+    }
     setState(initialState);
     fetchMovies(1, searchTerm);
   }, [searchTerm]);
@@ -45,6 +53,13 @@ export const useHomeFetch = () => {
     fetchMovies(state.page + 1, searchTerm);
     setIsLoadingMore(false);
   }, [isLoadingMore, searchTerm, state.page]);
+
+  // Write to session storage
+  useEffect(() => {
+    if (!searchTerm) {
+      sessionStorage.setItem("homeState", JSON.stringify(state));
+    }
+  }, [searchTerm, state]);
 
   return { state, loading, error, searchTerm, setSearchTerm, setIsLoadingMore };
 };
