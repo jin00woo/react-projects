@@ -6,8 +6,8 @@ const BreadCrumb = ({ movieTitle }) => {
   return (
     <Wrapper>
       <Content>
-        <Link to="/" style={{ textDecoration: "none" }}>
-          <span id="home">Home</span>
+        <Link to="/" className="home_link">
+          <span className="home">Home</span>
         </Link>
         <span>|</span>
         <span>{movieTitle}</span>

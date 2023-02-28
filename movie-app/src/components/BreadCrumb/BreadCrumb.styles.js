@@ -25,4 +25,14 @@ export const Content = styled.div`
       font-size: var(--fontSmall);
     }
   }
+
+  .home_link {
+    text-decoration: none;
+
+    .home {
+      :hover {
+        color: #000;
+      }
+    }
+  }
 `;
