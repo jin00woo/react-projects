@@ -1,14 +1,22 @@
-import React from "react";
+import React, { useContext } from "react";
 // Components
 import Thumb from "../Thumb";
+import Rate from "../Rate";
 // Config
 import { IMAGE_BASE_URL, POSTER_SIZE } from "../../config";
+import API from "../../API";
 // Image
 import NoImage from "../../images/no_image.jpg";
 // Styles
 import { Wrapper, Content, Text } from "./MovieInfo.styles";
+// Context
+import { Context } from "../../context";
 
 const MovieInfo = ({ movie }) => {
+  const [user] = useContext(Context);
+  const handleRating = async (value) => {
+    const rate = await API.rateMovie(user.sessionId, movie.id, value);
+  };
   return (
     <Wrapper backdrop={movie.backdrop_path}>
       <Content>
@@ -36,6 +44,12 @@ const MovieInfo = ({ movie }) => {
               })}
             </div>
           </div>
+          {user && (
+            <div>
+              <p>Rate Movie</p>
+              <Rate callback={handleRating} />
+            </div>
+          )}
         </Text>
       </Content>
     </Wrapper>
